@@ -1,0 +1,222 @@
+/**
+ * @license
+ * Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+ * This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+ * The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+ * The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+ * Code distributed by Google as part of the polymer project is also
+ * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+ */
+
+import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import './shared-styles.js';
+import './components/intro/feature-image';
+import './components/articles/grid-articles';
+import './components/sidebar/recent-posts';
+import '@polymer/paper-button/paper-button';
+import '@fluidnext-polymer/paper-pagination/paper-pagination';
+import '@fluidnext-polymer/paper-pagination/icons/paper-pagination-icons';
+import '@polymer/app-route/app-location.js';
+import '@polymer/app-route/app-route.js';
+
+class MyPolymerelement extends PolymerElement {
+  constructor(){
+    super();
+    this.page=0;
+  }
+
+  static get properties () {
+    return {
+      queryParams: {
+        type: Number,
+        value: '1'
+      },
+      currentPage:{
+        type: Number,
+        value: 2,
+      },
+      routeData: Object,
+      subroute: Object
+    }
+  }
+  static get template() {
+    return html`
+    <style include="shared-styles app-grid-style">
+      :host {
+        display: block;
+        --app-grid-columns: 2;
+        --app-grid-item-height: 650px;
+        margin-top: 30px;
+        font-family: 'Nunito Sans', sans-serif;
+      }
+      #content.content-with-sidebar-right{
+          width: 73%;
+          padding-right: 2%;
+          float: left;
+      }
+      .blog-list{
+          position: relative;
+          height: auto;
+          opacity: 1;
+      }
+      #sidebar.sidebar-right{
+        float: right;
+        width: 25%;
+      }
+      .widget-item{
+        padding-bottom: 45px;
+        margin-top: 60px;
+      }
+      #sidebar .widget-item .widget-title{
+        color: #505050;
+        font-size: 21px;
+        font-weight: 800;
+      }
+      .recent-posts{
+        position: relative;
+      }
+      .posts-click{
+        background: none;
+        border: none;
+        text-align: left;
+      }
+      .posts-click:active{
+        border: none;
+      }
+      @media screen and (max-width: 1100px) {
+        :host {
+          --app-grid-columns: 2;
+          --app-grid-item-height: 625px;
+        }
+        #content.content-with-sidebar-right{
+          float: none;
+          width: 100%;
+          padding-right: 0;
+        }
+        #sidebar.sidebar-right{
+          margin-top: 60px;
+          float: none;
+          width: 50%;
+          margin: auto;
+        }
+        .posts-click{
+          width: 100%;
+        }
+      }
+      @media screen and (max-width: 970px) {
+        :host {
+          --app-grid-columns: 1;
+          --app-grid-item-height: 625px;
+        }
+      }
+      @media screen and (max-width: 500px){
+        :host {
+          --app-grid-item-height: 625px;
+        }
+      }
+    </style>
+    
+    <app-location id="location"
+      route="{{route}}"
+      url-space-regex="^[[rootPath]]"
+      >
+    </app-location>
+    <feature-image
+      intro-title="Welcome To"
+      page-name="Polymer Element"
+      >
+    </feature-image>
+    <div class="entry-content">
+      <div id="content" class="content-with-sidebar-right">
+        <div class="blog-list">
+          <div class="app-grid">
+            <template is="dom-repeat" items="{{myposts}}">
+              <div class="item">  
+                <button class="posts-click" on-click="gotoSingle">
+                  <grid-articles
+                    post-images="http://localhost:3000/images/{{item.post_images}}"
+                    post-author="{{item.post_author}}"
+                    post-title="{{item.post_title}}"
+                    post-content="{{item.post_excerpt}}"
+                    post-date="{{item.post_date}}"
+                    >
+                  </grid-articles>
+                </button>
+              </div>
+            </template>
+          </div>
+          <template is="dom-repeat" items="{{postcount}}">  
+              <paper-pagination page="{{current}}" total-items="{{item.total}}" item-per-page="4" next-icon="paper-pagination:next-arrow" previous-icon="paper-pagination:previous-arrow">
+              </paper-pagination>
+          </template>
+        </div>
+      </div>
+      <div id="sidebar" class="sidebar-right">
+        <div class="widget-recent-posts widget-item">
+          <div class="wrap-recent-posts">
+            <h3 class="widget-title">Latest posts</h3>
+            <div class="recent-posts">
+              <recent-posts
+                recent-categories="Travel"
+                recent-title="Trip that you’ll never ever forget"
+                recent-images="http://localhost:3000/images/recent-post-images1.jpg"
+                >
+              </recent-posts>
+              
+              <recent-posts
+                recent-categories="Photography"
+                recent-title="Must-have gear"
+                recent-images="http://localhost:3000/images/recent-post-images2.jpg"
+                >
+              </recent-posts>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    `;
+  }
+  static get observers() {
+    return [
+        '_currentPageChange(current)'
+    ]
+  }
+  gotoSingle(e){
+    const id = e.model.item.id;
+    location.href = `/single-post/?post=${id}`
+  }
+  _currentPageChange(c){
+    let location = this.$.location;
+    let path = location.path;
+    this.page=c;
+    var params = this.queryParams;
+    if(this.page != 1){
+      params = Math.pow(2, this.page);
+      location.path = `/polymer-element/${this.page}`;
+      fetch(`http://localhost:3000/posts/polymerelement/${params}`)
+      .then(res => res.json())
+      .then(myposts => this.myposts = myposts)
+    }else{
+      params = 0;
+      location.path = `/polymer-element/${this.page}`;
+      fetch(`http://localhost:3000/posts/polymerelement/${params}`)
+      .then(res => res.json())
+      .then(myposts => this.myposts = myposts)
+      console.log(this.page);
+    }
+  }
+  connectedCallback(e){
+    var params = this.queryParams;
+    super.connectedCallback();
+    fetch(`http://localhost:3000/posts/polymerelement/${params}`)
+    .then(res => res.json())
+    .then(myposts => this.myposts = myposts)
+    console.log(params);
+    fetch(`http://localhost:3000/postscount/polymerelement`)
+    .then(res => res.json())
+    .then(postcount => this.postcount = postcount)
+  }
+}
+
+window.customElements.define('my-polymerelement', MyPolymerelement);
