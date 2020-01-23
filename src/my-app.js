@@ -141,6 +141,7 @@ class MyApp extends PolymerElement {
         }
         .mobile-menu-button{
           display: block!important;
+          color: var(--mobile-menu-color, white);
         }
         .mobile-menu{
           display: inline-grid;
@@ -161,7 +162,7 @@ class MyApp extends PolymerElement {
       <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}">
       </app-route>
       <app-drawer-layout fullbleed="" narrow="{{narrow}}">
-      <app-drawer id="drawer" swipe-open>
+      <app-drawer id="drawer"  swipe-open>
         <div class="mobile-menu">
           <a name="homepage" href="[[rootPath]]home">Home</a>
           <a name="polymer-element" href="[[rootPath]]polymer-element">Polymer Element</a>
@@ -250,6 +251,7 @@ class MyApp extends PolymerElement {
         this.updateStyles({'--navgation-color': 'white'});
         this.updateStyles({'--logo-color': 'white'});
         this.updateStyles({'--menu-display': 'block'});
+        this.updateStyles({'--mobile-menu-color': 'white'});
         break;
       case 'polymer-element':
         import('./my-polymerelement');
@@ -257,6 +259,7 @@ class MyApp extends PolymerElement {
         this.updateStyles({'--navgation-color': 'white'});
         this.updateStyles({'--logo-color': 'white'});
         this.updateStyles({'--menu-display': 'block'});
+        this.updateStyles({'--mobile-menu-color': 'white'});
         break;
       case 'view3':
         import('./my-view3.js');
@@ -264,6 +267,7 @@ class MyApp extends PolymerElement {
         this.updateStyles({'--navgation-color': 'white'});
         this.updateStyles({'--logo-color': 'white'});
         this.updateStyles({'--menu-display': 'block'});
+        this.updateStyles({'--mobile-menu-color': 'white'});
         break;
       case 'about':
         import('./my-about.js');
@@ -271,6 +275,7 @@ class MyApp extends PolymerElement {
         this.updateStyles({'--navgation-color': 'white'});
         this.updateStyles({'--logo-color': 'white'});
         this.updateStyles({'--menu-display': 'block'});
+        this.updateStyles({'--mobile-menu-color': 'white'});
         break;
       case 'single-post':
         import('./single-post.js');
@@ -278,6 +283,7 @@ class MyApp extends PolymerElement {
         this.updateStyles({'--navgation-color': 'rgba(61,61,61,0.69)'});
         this.updateStyles({'--logo-color': 'black'});
         this.updateStyles({'--menu-display': 'block'});
+        this.updateStyles({'--mobile-menu-color': 'black'});
         break;
       case 'admin':
         import('./admin/my-admin.js');

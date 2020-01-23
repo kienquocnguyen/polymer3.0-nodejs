@@ -485,6 +485,17 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@fluidnext-polymer/paper-input-file@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@fluidnext-polymer/paper-input-file/-/paper-input-file-3.1.0.tgz#a2cbd6984858fe7be0a3f30259f1793bb936a3f0"
+  integrity sha512-AV0xYFEEbslPasURG9gxnoA+meuTY1tiSAhXcH30VfsK/cf3ZN0zNPkiZgZOd8SHWuoXxUrQnmYpRcg+1z/hsA==
+  dependencies:
+    "@polymer/iron-flex-layout" "^3.0.1"
+    "@polymer/iron-icon" "^3.0.1"
+    "@polymer/paper-icon-button" "^3.0.1"
+    "@polymer/paper-input" "^3.0.2"
+    "@polymer/polymer" "^3.2.0"
+
 "@fluidnext-polymer/paper-pagination@^3.0.4":
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/@fluidnext-polymer/paper-pagination/-/paper-pagination-3.0.4.tgz#bad98c70898966b370ada380c13fcc548c51211e"
@@ -539,6 +550,11 @@
   version "0.2.22"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.2.22.tgz#3f1328d232a0fd5de8484d833c8519426f39f016"
   integrity sha512-QmEuZsipX5/cR9JOg0fsTN4Yr/9lieYWM8AQpmRa0eIfeOcl/HLYoEa366BCGRSrgNJEexuvOgbq9jnJ22IY5g==
+
+"@fortawesome/fontawesome-free@^5.9.0":
+  version "5.12.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.12.0.tgz#8ceb9f09edfb85ea18a6c7bf098f6f5dd5ffd62b"
+  integrity sha512-vKDJUuE2GAdBERaQWmmtsciAMzjwNrROXA5KTGSZvayAsmuTGjam5z6QNqNPCwDfVljLWuov1nEC3mEQf/n6fQ==
 
 "@fortawesome/fontawesome-svg-core@^1.2.0":
   version "1.2.22"
@@ -782,7 +798,7 @@
     "@polymer/iron-ajax" "^3.0.0-pre.26"
     "@polymer/polymer" "^3.0.0"
 
-"@polymer/iron-icon@^3.0.0", "@polymer/iron-icon@^3.0.0-pre.26":
+"@polymer/iron-icon@^3.0.0", "@polymer/iron-icon@^3.0.0-pre.26", "@polymer/iron-icon@^3.0.1":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@polymer/iron-icon/-/iron-icon-3.0.1.tgz#93211c39d8825fe4965a68419566036c1df291eb"
   integrity sha512-QLPwirk+UPZNaLnMew9VludXA4CWUCenRewgEcGYwdzVgDPCDbXxy6vRJjmweZobMQv/oVLppT2JZtJFnPxX6g==
@@ -934,6 +950,14 @@
     "@polymer/iron-meta" "^3.0.0-pre.26"
     "@polymer/polymer" "^3.0.0"
 
+"@polymer/marked-element@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@polymer/marked-element/-/marked-element-3.0.1.tgz#56add62080404dea142c055977807ae9ca773a89"
+  integrity sha512-WJQzQetxdStVGQbyTBUBgd+hSI0Rl39uJg7b2zL3r6EfMnibzmA/YNT06M8jVZdxPF+B4SumrFWRtasVtGQRUQ==
+  dependencies:
+    "@polymer/polymer" "^3.0.0"
+    marked "~0.3.9"
+
 "@polymer/neon-animation@^3.0.0-pre.26", "@polymer/neon-animation@^3.0.1":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@polymer/neon-animation/-/neon-animation-3.0.1.tgz#6658e4b524abc057477772a7473292493d366c24"
@@ -971,6 +995,25 @@
     "@polymer/iron-flex-layout" "^3.0.0-pre.26"
     "@polymer/iron-image" "^3.0.0-pre.26"
     "@polymer/paper-styles" "^3.0.0-pre.26"
+    "@polymer/polymer" "^3.0.0"
+
+"@polymer/paper-dialog-behavior@^3.0.0-pre.26":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@polymer/paper-dialog-behavior/-/paper-dialog-behavior-3.0.1.tgz#819b2fbb9444c1c318ddf55f02819bb29a85657b"
+  integrity sha512-wbI4kCK8le/9MHT+IXzvHjoatxf3kd3Yn0tgozAiAwfSZ7N4Ubpi5MHrK0m9S9PeIxKokAgBYdTUrezSE5378A==
+  dependencies:
+    "@polymer/iron-overlay-behavior" "^3.0.0-pre.27"
+    "@polymer/paper-styles" "^3.0.0-pre.26"
+    "@polymer/polymer" "^3.0.0"
+
+"@polymer/paper-dialog@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@polymer/paper-dialog/-/paper-dialog-3.0.1.tgz#728ebdbfc4d35ec1485e543434cef5dba476f15e"
+  integrity sha512-KvglYbEq7AWJvui2j6WKLnOvgVMeGjovAydGrPRj7kVzCiD49Eq/hpYFJTRV5iDcalWH+mORUpw+jrFnG9+Kgw==
+  dependencies:
+    "@polymer/iron-overlay-behavior" "^3.0.0-pre.27"
+    "@polymer/neon-animation" "^3.0.0-pre.26"
+    "@polymer/paper-dialog-behavior" "^3.0.0-pre.26"
     "@polymer/polymer" "^3.0.0"
 
 "@polymer/paper-dropdown-menu@^3.0.1":
@@ -1768,10 +1811,10 @@
     "@vaadin/vaadin-development-mode-detector" "^2.0.0"
     "@vaadin/vaadin-usage-statistics" "^2.0.2"
 
-"@vaadin/vaadin-grid@^5.4.6":
-  version "5.4.8"
-  resolved "https://registry.yarnpkg.com/@vaadin/vaadin-grid/-/vaadin-grid-5.4.8.tgz#822490e6c51e7bea85c5d6d94203ec33010997ca"
-  integrity sha512-1N7sNM5WkPk0JjGGBaaGn3GanJpkE6ysUsUephqmBJSMFa3xLq2iGslxKeKUMOjbijSw5085rAvzLnDbjDJUCA==
+"@vaadin/vaadin-grid@^5.5.0":
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/@vaadin/vaadin-grid/-/vaadin-grid-5.5.0.tgz#3c10055925db6dd2404287c0199893a959f8eaad"
+  integrity sha512-QQ7NdP8ug8xh3WrTQTP+CB1HCPVjr462Zrnk2uCD4G8Wdw9KTzw9avuauwlMm9pv/CrsP19x5hJS+bmqYSJd5A==
   dependencies:
     "@polymer/iron-a11y-announcer" "^3.0.0"
     "@polymer/iron-a11y-keys-behavior" "^3.0.0"
@@ -4077,6 +4120,14 @@ extsprintf@^1.2.0:
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
   integrity sha1-4mifjzVvrWLMplo6kcXfX5VRaS8=
 
+fa-icons@^0.1.9:
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/fa-icons/-/fa-icons-0.1.9.tgz#27a5881ea150d6fe7be6953ab36634516bb6c1e1"
+  integrity sha512-dZ8DJgve98QBJaR/zwu3Ha9rlx7Ms8uycTtBiUMp0MeBq/Ykzhz/mzehzHVG4R5DrJVKJDW9HOwE40mW98lnbw==
+  dependencies:
+    "@fortawesome/fontawesome-free" "^5.9.0"
+    lit-element "^2.1.0"
+
 fast-deep-equal@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
@@ -5660,7 +5711,7 @@ lazystream@^1.0.0:
   dependencies:
     readable-stream "^2.0.5"
 
-lit-element@^2.0.0, lit-element@^2.2.0:
+lit-element@^2.0.0, lit-element@^2.1.0, lit-element@^2.2.0:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/lit-element/-/lit-element-2.2.1.tgz#79c94d8cfdc2d73b245656e37991bd1e4811d96f"
   integrity sha512-ipDcgQ1EpW6Va2Z6dWm79jYdimVepO5GL0eYkZrFvdr0OD/1N260Q9DH+K5HXHFrRoC7dOg+ZpED2XE0TgGdXw==
@@ -5971,6 +6022,11 @@ map-visit@^1.0.0:
   integrity sha1-7Nyo8TFE5mDxtb1B8S80edmN+48=
   dependencies:
     object-visit "^1.0.0"
+
+marked@~0.3.9:
+  version "0.3.19"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.19.tgz#5d47f709c4c9fc3c216b6d46127280f40b39d790"
+  integrity sha512-ea2eGWOqNxPcXv8dyERdSr/6FmzvWwzjMxpfGB/sbMccXoct+xY+YukPD+QTUZwyvK7BZwcr4m21WBOW41pAkg==
 
 matcher@^1.1.0:
   version "1.1.1"

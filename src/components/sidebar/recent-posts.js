@@ -108,7 +108,7 @@ class RecentPosts extends PolymerElement {
         </style>
         <div class="recent-post-item">
             <div class="recent-post-thumb">
-                <a href="https://www.google.com/">
+                <a>
                     <div class="ratio">
                         <div class="ratio-container">
                             <iron-image class="ratio-content" src="[[recentImages]]"></iron-image>
@@ -121,9 +121,9 @@ class RecentPosts extends PolymerElement {
             </div>
             <div class="recent-post-content">
                 <span class="recent-post-categories">
-                    <a href="https://www.google.com/">[[recentCategories]]</a>
+                    <a>[[recentCategories]]</a>
                 </span>
-                <a href="https://www.google.com/" class="recent-posts-title">
+                <a class="recent-posts-title">
                     <h6>[[recentTitle]]</h6>
                 </a>
             </div>

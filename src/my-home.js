@@ -75,14 +75,6 @@ class MyHome extends PolymerElement {
       .recent-posts{
         position: relative;
       }
-      .posts-click{
-        background: none;
-        border: none;
-        text-align: left;
-      }
-      .posts-click:active{
-        border: none;
-      }
       @media screen and (max-width: 1100px) {
         :host {
           --app-grid-columns: 2;
@@ -98,9 +90,6 @@ class MyHome extends PolymerElement {
           float: none;
           width: 50%;
           margin: auto;
-        }
-        .posts-click{
-          width: 100%;
         }
       }
       @media screen and (max-width: 970px) {
@@ -156,19 +145,16 @@ class MyHome extends PolymerElement {
           <div class="wrap-recent-posts">
             <h3 class="widget-title">Latest posts</h3>
             <div class="recent-posts">
-              <recent-posts
-                recent-categories="Travel"
-                recent-title="Trip that you’ll never ever forget"
-                recent-images="http://localhost:3000/images/recent-post-images1.jpg"
-                >
-              </recent-posts>
-              
-              <recent-posts
-                recent-categories="Photography"
-                recent-title="Must-have gear"
-                recent-images="http://localhost:3000/images/recent-post-images2.jpg"
-                >
-              </recent-posts>
+              <template is="dom-repeat" items="{{latestposts}}">
+                <button class="posts-click" on-click="gotoSingle">
+                  <recent-posts
+                    recent-categories="{{item.post_categories}}"
+                    recent-title="{{item.post_title}}"
+                    recent-images="http://localhost:3000/images/{{item.post_images}}"
+                    >
+                  </recent-posts>
+                </button>
+              </template>
 
             </div>
           </div>
@@ -216,6 +202,9 @@ class MyHome extends PolymerElement {
     fetch(`http://localhost:3000/postscount`)
     .then(res => res.json())
     .then(postcount => this.postcount = postcount)
+    fetch(`http://localhost:3000/latest/posts`)
+    .then(res => res.json())
+    .then(latestposts => this.latestposts = latestposts)
   }
 }
 

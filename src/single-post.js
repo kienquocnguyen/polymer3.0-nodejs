@@ -186,19 +186,16 @@ class SinglePost extends PolymerElement {
             <div class="wrap-recent-posts">
               <h3 class="widget-title">Latest posts</h3>
               <div class="recent-posts">
-                <recent-posts
-                  recent-categories="Travel"
-                  recent-title="Trip that you’ll never ever forget"
-                  recent-images="images/recent-post-images1.jpg"
-                  >
-                </recent-posts>
-                
-                <recent-posts
-                  recent-categories="Photography"
-                  recent-title="Must-have gear"
-                  recent-images="images/recent-post-images2.jpg"
-                  >
-                </recent-posts>
+                <template is="dom-repeat" items="{{latestposts}}">
+                  <button class="posts-click" on-click="gotoSingle">
+                    <recent-posts
+                      recent-categories="{{item.post_categories}}"
+                      recent-title="{{item.post_title}}"
+                      recent-images="http://localhost:3000/images/{{item.post_images}}"
+                      >
+                    </recent-posts>
+                  </button>
+                </template>
             </div>
           </div>
         </div>
@@ -207,6 +204,11 @@ class SinglePost extends PolymerElement {
   }
   getQueryParameters (str) {
     return (str || document.location.search).replace(/(^\?)/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
+  }
+  
+  gotoSingle(e){
+    const id = e.model.item.id;
+    location.href = `/single-post/?post=${id}`
   }
   
   connectedCallback(){
@@ -220,6 +222,9 @@ class SinglePost extends PolymerElement {
     .then(singleposts => {
         this.singleposts = singleposts;
     })
+    fetch(`http://localhost:3000/latest/posts`)
+    .then(res => res.json())
+    .then(latestposts => this.latestposts = latestposts)
   }
 }
 

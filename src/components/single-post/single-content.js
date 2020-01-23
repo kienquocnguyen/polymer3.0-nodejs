@@ -12,6 +12,7 @@ import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '../../shared-styles.js';
 import '@polymer/iron-image/iron-image.js';
 import '@polymer/marked-element/marked-element.js';
+import '@polymer/paper-button/paper-button'
 class SingleContent extends PolymerElement {
   static get properties () {
     return {
@@ -60,7 +61,7 @@ class SingleContent extends PolymerElement {
             display: block;
             max-width: 100%;
             min-height: 30px;
-            overflow: hidden;
+            overflow: var(--posts-length-limit, hidden);
         }
         .post-images {
             --iron-image-height: 480px;
@@ -99,13 +100,23 @@ class SingleContent extends PolymerElement {
             word-break: break-word;
         }
         .single-post-content p {
-            color: #8d8d8d;
+            color: black;
+        }
+        .single-post-content a{
+            color: #47c9e5;
         }
         .single-post-item{
             left: 0px;
             top: 0px;
             width: 100%;
             float: left;
+        }
+        .showmore{
+            margin-top: 10px;
+            width: 100%;
+            height: 100px;
+            display: var(--read-more, grid);
+            box-shadow: 0px 15px 45px 0px rgba(0,0,0,.2);
         }
         @media screen and (max-width: 1000px) {
             .post-images {
@@ -143,9 +154,16 @@ class SingleContent extends PolymerElement {
                     <div class="single-post-content textcontent" inner-h-t-m-l="[[singleContent]]" >
                     </div>
                 </div>
+                <paper-button class="showmore" on-click="readMore">
+                    Read More
+                </paper-button>
             </div>
         </article>
     `;
+  }
+  readMore(){
+    this.updateStyles({'--posts-length-limit': 'none'});
+    this.updateStyles({'--read-more': 'none'});
   }
 }
 

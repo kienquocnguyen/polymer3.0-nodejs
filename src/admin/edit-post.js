@@ -20,6 +20,7 @@ import '@polymer/app-route/app-route.js';
 import '@vaadin/vaadin-upload/vaadin-upload.js';
 import '@fooloomanzoo/datetime-input/datetime-input';
 import 'fontawesome-icon';
+import 'fa-icons';
 class EditPost extends PolymerElement {
   ready(){
     super.ready();
@@ -62,7 +63,7 @@ class EditPost extends PolymerElement {
       }
       .richTextField{
           width: 100%;
-          height: 500px;
+          height: 700px;
           font-family: 'Nunito Sans', sans-serif!important;
           border: 1px solid black;
       }
@@ -128,12 +129,33 @@ class EditPost extends PolymerElement {
                     <paper-button raised class="richtext-button" on-click="italicCommand">
                       <fontawesome-icon prefix="fas" name="italic" fixed-width></fontawesome-icon>
                     </paper-button>
+                    <paper-button raised class="richtext-button" on-click="alignLeft">
+                    <fa-icon class="fas fa-align-left" color="#757575" size="1em"></fa-icon>
+                    </paper-button>
+                    <paper-button raised class="richtext-button" on-click="alignCenter">
+                      <fa-icon class="fas fa-align-center" color="#757575" size="1em"></fa-icon>
+                    </paper-button>
+                    <paper-button raised class="richtext-button" on-click="alignRight">
+                      <fa-icon class="fas fa-align-right" color="#757575" size="1em"></fa-icon>
+                    </paper-button>
+                    <paper-button raised class="richtext-button" on-click="addLink">
+                      <fa-icon class="fas fa-link" color="#757575" size="1em"></fa-icon>
+                    </paper-button>
                     <select class="richtext-selector" on-change="headingCommand" id="selectHeading">
                         <option> Choose Your Heading </option>
                         <option value="H1">H1</option>
                         <option value="H2">H2</option>
                         <option value="H3">H3</option>
                         <option value="H4">H4</option>
+                    </select>
+                    <select class="richtext-selector" on-change="sizeCommand" id="selectSize">
+                      <option> Choose Font Size </option>
+                      <option value="16px">16px</option>
+                      <option value="20px">20px</option>
+                      <option value="24px">24px</option>
+                      <option value="28px">28px</option>
+                      <option value="32px">32px</option>
+                      <option value="36px">36px</option>
                     </select>
                     <select class="richtext-selector" on-change="fontCommand" id="selectFont">
                         <option> Choose Your Fonts </option>
@@ -227,11 +249,47 @@ class EditPost extends PolymerElement {
     const italiccmd = richtext.contentDocument;
     italiccmd.execCommand('italic', false, null);
   }
+  alignLeft(){
+    const richtext = this.shadowRoot.getElementById("richtext")
+    const alignleftcmd = richtext.contentDocument;
+    alignleftcmd.execCommand("JustifyLeft", false, "");
+  }
+  alignCenter(){
+    const richtext = this.shadowRoot.getElementById("richtext")
+    const aligncentercmd = richtext.contentDocument;
+    aligncentercmd.execCommand("JustifyCenter", false, "");
+  }
+  alignRight(){
+    const richtext = this.shadowRoot.getElementById("richtext")
+    const alignrightcmd = richtext.contentDocument;
+    alignrightcmd.execCommand("JustifyRight", false, "");
+  }
+  addLink(){
+    const richtext = this.shadowRoot.getElementById("richtext")
+    const addlinkcmd = richtext.contentDocument;
+    var linkURL = prompt('Enter a URL:', 'http://');
+    var sText = addlinkcmd.getSelection();
+    addlinkcmd.execCommand('insertHTML', false, '<a href="' + linkURL + '" target="_blank">' + sText + '</a>');
+  }
   headingCommand(){
     const richtext = this.shadowRoot.getElementById("richtext");
     const headingcmd = richtext.contentDocument;
     const selectheader = this.shadowRoot.getElementById("selectHeading");
     headingcmd.execCommand('formatBlock', false, selectheader.value);
+  }
+  sizeCommand(){
+    const richtext = this.shadowRoot.getElementById("richtext")
+    const sizecmd = richtext.contentDocument;
+    const selectsize = this.$.selectSize;
+    console.log (selectsize.value);
+    sizecmd.execCommand('fontSize', false, '7');
+    var fontElements = sizecmd.getElementsByTagName("font");
+    for (var i = 0, len = fontElements.length; i < len; ++i) {
+        if (fontElements[i].size == "7") {
+            fontElements[i].removeAttribute("size");
+            fontElements[i].style.fontSize = selectsize.value;
+        }
+    }
   }
   fontCommand(){
     const richtext = this.shadowRoot.getElementById("richtext");
@@ -240,6 +298,7 @@ class EditPost extends PolymerElement {
     console.log(selectfont.value);
     fontcmd.execCommand('fontName', false, selectfont.value);
   }
+  
   uploadSuccess(e){
     debugger;
     var imgname = e.detail.file.name;

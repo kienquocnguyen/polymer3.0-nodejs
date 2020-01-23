@@ -19,6 +19,7 @@ import '@polymer/app-route/app-location.js';
 import '@polymer/app-route/app-route.js';
 import '@vaadin/vaadin-upload/vaadin-upload.js';
 import 'fontawesome-icon';
+import 'fa-icons';
 class MyAdmin extends PolymerElement {
   constructor(){
     super();   
@@ -66,7 +67,7 @@ class MyAdmin extends PolymerElement {
       }
       .richTextField{
           width: 100%;
-          height: 500px;
+          height: 700px;
           font-family: 'Nunito Sans', sans-serif!important;
           border: 1px solid black;
       }
@@ -96,7 +97,7 @@ class MyAdmin extends PolymerElement {
       <div class="card">
         <iron-form id="postForm" >
           <form method="post" action="http://localhost:3000/posts" is="iron-form">
-            <paper-input decorator type="text" label="Post Author" id="post_author" name="post_author">
+            <paper-input decorator type="text" label="Post Author" id="post_author" name="post_author" value="admin">
             </paper-input>
 
             <paper-input decorator type="text" label="Post Categories" id="post_categories" name="post_categories">
@@ -132,12 +133,33 @@ class MyAdmin extends PolymerElement {
                   <paper-button raised class="richtext-button" on-click="italicCommand">
                       <fontawesome-icon prefix="fas" name="italic" fixed-width></fontawesome-icon>
                   </paper-button>
+                  <paper-button raised class="richtext-button" on-click="alignLeft">
+                    <fa-icon class="fas fa-align-left" color="#757575" size="1em"></fa-icon>
+                  </paper-button>
+                  <paper-button raised class="richtext-button" on-click="alignCenter">
+                    <fa-icon class="fas fa-align-center" color="#757575" size="1em"></fa-icon>
+                  </paper-button>
+                  <paper-button raised class="richtext-button" on-click="alignRight">
+                    <fa-icon class="fas fa-align-right" color="#757575" size="1em"></fa-icon>
+                  </paper-button>
+                  <paper-button raised class="richtext-button" on-click="addLink">
+                    <fa-icon class="fas fa-link" color="#757575" size="1em"></fa-icon>
+                  </paper-button>
                   <select class="richtext-selector" on-change="headingCommand" id="selectHeading">
                       <option> Choose Your Heading </option>
                       <option value="H1">H1</option>
                       <option value="H2">H2</option>
                       <option value="H3">H3</option>
                       <option value="H4">H4</option>
+                  </select>
+                  <select class="richtext-selector" on-change="sizeCommand" id="selectSize">
+                    <option> Choose Font Size </option>
+                    <option value="16px">16px</option>
+                    <option value="20px">20px</option>
+                    <option value="24px">24px</option>
+                    <option value="28px">28px</option>
+                    <option value="32px">32px</option>
+                    <option value="36px">36px</option>
                   </select>
                   <select class="richtext-selector" on-change="fontCommand" id="selectFont">
                       <option> Choose Your Fonts </option>
@@ -205,15 +227,45 @@ class MyAdmin extends PolymerElement {
     const italiccmd = this.$.richtext.contentDocument;
     italiccmd.execCommand('italic', false, null);
   }
+  alignLeft(){
+    const alignleftcmd = this.$.richtext.contentDocument;
+    alignleftcmd.execCommand("JustifyLeft", false, "");
+  }
+  alignCenter(){
+    const aligncentercmd = this.$.richtext.contentDocument;
+    aligncentercmd.execCommand("JustifyCenter", false, "");
+  }
+  alignRight(){
+    const alignrightcmd = this.$.richtext.contentDocument;
+    alignrightcmd.execCommand("JustifyRight", false, "");
+  }
+  addLink(){
+    const addlinkcmd = this.$.richtext.contentDocument;
+    var linkURL = prompt('Enter a URL:', 'http://');
+    var sText = addlinkcmd.getSelection();
+    addlinkcmd.execCommand('insertHTML', false, '<a href="' + linkURL + '" target="_blank">' + sText + '</a>');
+  }
   headingCommand(){
     const headingcmd = this.$.richtext.contentDocument;
     const selectheader = this.$.selectHeading;
     headingcmd.execCommand('formatBlock', false, selectheader.value);
   }
+  sizeCommand(){
+    const sizecmd = this.$.richtext.contentDocument;
+    const selectsize = this.$.selectSize;
+    console.log (selectsize.value);
+    sizecmd.execCommand('fontSize', false, '7');
+    var fontElements = sizecmd.getElementsByTagName("font");
+    for (var i = 0, len = fontElements.length; i < len; ++i) {
+        if (fontElements[i].size == "7") {
+            fontElements[i].removeAttribute("size");
+            fontElements[i].style.fontSize = selectsize.value;
+        }
+    }
+  }
   fontCommand(){
     const fontcmd = this.$.richtext.contentDocument;
     const selectfont = this.$.selectFont;
-    console.log(selectfont.value);
     fontcmd.execCommand('fontName', false, selectfont.value);
   }
   uploadSuccess(e){
@@ -222,7 +274,7 @@ class MyAdmin extends PolymerElement {
     var id = "test";
     console.log(imgname);
     const addimage = this.$.richtext.contentDocument;
-    var img = "<div style='max-width: 800px;'><img style='width: 100%;' src='http://localhost:3000/images/" + imgname + "' id=" + id + "></div>";
+    var img = "<div style='max-width: 800px; max-height: 600px; display: block;'><img style='width: 100%; text-align: center;' src='http://localhost:3000/images/" + imgname + "'</div>";
     addimage.execCommand('insertHTML', true, img);
   }
 

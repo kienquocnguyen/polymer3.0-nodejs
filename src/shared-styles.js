@@ -95,6 +95,19 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         max-height: 600px;
         border: 1px solid black;
       }
+      .posts-click{
+        background: none;
+        border: none;
+        text-align: left;
+      }
+      .posts-click:active{
+        border: none;
+      }
+      @media screen and (max-width: 1100px) {
+        .posts-click{
+          width: 100%;
+        }
+      }
       @media screen and (max-width: 1300px) {
         .post-item{
           max-width: 380px;
