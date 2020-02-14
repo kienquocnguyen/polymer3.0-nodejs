@@ -123,11 +123,12 @@ class MyHome extends PolymerElement {
               <div class="item">  
                 <button class="posts-click" on-click="gotoSingle">
                   <grid-articles
-                    post-images="http://localhost:3000/images/{{item.post_images}}"
+                    post-images="https://api.mypolymerblog.com/images/{{item.post_images}}"
                     post-author="{{item.post_author}}"
                     post-title="{{item.post_title}}"
                     post-content="{{item.post_excerpt}}"
                     post-date="{{item.post_date}}"
+                    post-categories="{{item.post_categories}}"
                     >
                   </grid-articles>
                 </button>
@@ -150,7 +151,7 @@ class MyHome extends PolymerElement {
                   <recent-posts
                     recent-categories="{{item.post_categories}}"
                     recent-title="{{item.post_title}}"
-                    recent-images="http://localhost:3000/images/{{item.post_images}}"
+                    recent-images="https://api.mypolymerblog.com/images/{{item.post_images}}"
                     >
                   </recent-posts>
                 </button>
@@ -169,8 +170,8 @@ class MyHome extends PolymerElement {
     ]
   }
   gotoSingle(e){
-    const id = e.model.item.id;
-    location.href = `/single-post/?post=${id}`
+    const permalinks = e.model.item.permalinks;
+    location.href = `/single-post/?post=${permalinks}`
   }
   _currentPageChange(c){
     let location = this.$.location;
@@ -180,13 +181,13 @@ class MyHome extends PolymerElement {
     if(this.page != 1){
       params = Math.pow(2, this.page);
       location.path = `/home/${this.page}`;
-      fetch(`http://localhost:3000/posts/${params}`)
+      fetch(`https://api.mypolymerblog.com/posts/${params}`)
       .then(res => res.json())
       .then(myposts => this.myposts = myposts)
     }else{
       params = 0;
       location.path = `/home/${this.page}`;
-      fetch(`http://localhost:3000/posts/${params}`)
+      fetch(`https://api.mypolymerblog.com/posts/${params}`)
       .then(res => res.json())
       .then(myposts => this.myposts = myposts)
       console.log(this.page);
@@ -195,14 +196,14 @@ class MyHome extends PolymerElement {
   connectedCallback(e){
     var params = this.queryParams;
     super.connectedCallback();
-    fetch(`http://localhost:3000/posts/${params}`)
+    fetch(`https://api.mypolymerblog.com/posts/${params}`)
     .then(res => res.json())
     .then(myposts => this.myposts = myposts)
     console.log(params);
-    fetch(`http://localhost:3000/postscount`)
+    fetch(`https://api.mypolymerblog.com/postscount`)
     .then(res => res.json())
     .then(postcount => this.postcount = postcount)
-    fetch(`http://localhost:3000/latest/posts`)
+    fetch(`https://api.mypolymerblog.com/latest/posts`)
     .then(res => res.json())
     .then(latestposts => this.latestposts = latestposts)
   }

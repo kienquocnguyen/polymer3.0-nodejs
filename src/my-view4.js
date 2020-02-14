@@ -33,7 +33,7 @@ class MyView4 extends PolymerElement {
     console.log("Before go to the page");
     var params;
     params = 2;
-    fetch(`http://localhost:3000/post/${params}`)
+    fetch(`https://api.mypolymerblog.com/post/${params}`)
     .then(res => res.json())
     .then(singleposts => this.singleposts = singleposts)
     console.log(params);

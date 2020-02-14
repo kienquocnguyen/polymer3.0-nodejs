@@ -125,11 +125,12 @@ class SinglePost extends PolymerElement {
           width: 100%;
           padding-right: 0;
         }
-        #sidebar.sidebar-right{
+        :host #sidebar.sidebar-right{
           margin-top: 60px;
           float: none;
           width: 50%;
           margin: auto;
+          display: none;
         }
       }
       @media screen and (max-width: 500px){
@@ -170,7 +171,7 @@ class SinglePost extends PolymerElement {
               <datetime-input value-as-date="{{item.post_date}}" datetime="{{datetime}}" date="{{date}}" time="{{time}}" with-timezone="{{withTimezone}}" timezone="{{timezone}}"></datetime-input>  
               <single-content
                 single-title="{{item.post_title}}"
-                single-images="http://localhost:3000/images/{{item.post_images}}"
+                single-images="https://api.mypolymerblog.com/images/{{item.post_images}}"
                 single-author="{{item.post_author}}"
                 single-date="[[date]]"
                 single-categories="{{item.post_categories}}"
@@ -191,7 +192,7 @@ class SinglePost extends PolymerElement {
                     <recent-posts
                       recent-categories="{{item.post_categories}}"
                       recent-title="{{item.post_title}}"
-                      recent-images="http://localhost:3000/images/{{item.post_images}}"
+                      recent-images="https://api.mypolymerblog.com/images/{{item.post_images}}"
                       >
                     </recent-posts>
                   </button>
@@ -207,8 +208,8 @@ class SinglePost extends PolymerElement {
   }
   
   gotoSingle(e){
-    const id = e.model.item.id;
-    location.href = `/single-post/?post=${id}`
+    const permalinks = e.model.item.permalinks;
+    location.href = `/single-post/?post=${permalinks}`
   }
   
   connectedCallback(){
@@ -217,12 +218,12 @@ class SinglePost extends PolymerElement {
     console.log("HIHI", queryParams.post);
     var params;
     params = queryParams.post;
-    fetch(`http://localhost:3000/post/${params}`)
+    fetch(`https://api.mypolymerblog.com/post/${params}`)
     .then(res =>res.json())
     .then(singleposts => {
         this.singleposts = singleposts;
     })
-    fetch(`http://localhost:3000/latest/posts`)
+    fetch(`https://api.mypolymerblog.com/latest/posts`)
     .then(res => res.json())
     .then(latestposts => this.latestposts = latestposts)
   }

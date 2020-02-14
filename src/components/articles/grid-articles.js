@@ -34,6 +34,10 @@ class GridArticles extends PolymerElement {
         postDate:{
           type: Date,
           value: new Date("1900-01-01")
+        },
+        postCategories:{
+          type: String,
+          value: "Blog"
         }
     };
   }
@@ -169,7 +173,7 @@ class GridArticles extends PolymerElement {
         <article class="post-item posts-list">
             <div class="post-container">
                 <div class="post-meta-thumb">
-                    <iron-image alt="post-images" class="post-images" src="[[postImages]]"></iron-image>
+                    <iron-image alt="polymer-3.0" class="post-images" src="[[postImages]]"></iron-image>
                 </div>
                 <div class="post-content-container">
                     <div class="post-meta-one">
@@ -192,11 +196,11 @@ class GridArticles extends PolymerElement {
                         <div class="post-meta-comments">
                             <span class="post-meta-categories">
                                 <i class="icon-tag"></i>
-                                <a>People, Travel</a>
+                                <a>[[postCategories]]</a>
                             </span>
                             <a class="post-comments">
                                 <span>
-                                <iron-image class="icon-bubble" src="images/speech-bubble.png"></iron-image>
+                                <iron-image alt="polymer-3.0" class="icon-bubble" src="images/speech-bubble.png"></iron-image>
                                 0
                                 </span>
                             </a>

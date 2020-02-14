@@ -60,8 +60,7 @@ class SingleContent extends PolymerElement {
         .single-meta{
             display: block;
             max-width: 100%;
-            min-height: 30px;
-            overflow: var(--posts-length-limit, hidden);
+            overflow-y: var(--posts-length-limit, hidden);
         }
         .post-images {
             --iron-image-height: 480px;
@@ -131,7 +130,7 @@ class SingleContent extends PolymerElement {
         <article class="single-content single-post-item">
             <div class="post-container">
                 <div class="single-meta">
-                    <iron-image alt="post-images" class="post-images" src="[[singleImages]]"></iron-image>
+                    <iron-image alt="polymer-3.0" class="post-images" src="[[singleImages]]"></iron-image>
                     <a href="http://google.com/" class="post-title">
                         <h2>[[singleTitle]]</h2>
                     </a>
@@ -162,7 +161,7 @@ class SingleContent extends PolymerElement {
     `;
   }
   readMore(){
-    this.updateStyles({'--posts-length-limit': 'none'});
+    this.updateStyles({'--posts-length-limit': 'visible'});
     this.updateStyles({'--read-more': 'none'});
   }
 }

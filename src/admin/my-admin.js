@@ -28,7 +28,7 @@ class MyAdmin extends PolymerElement {
     super.ready();
     console.log(localStorage.getItem("cool-jwt"));
  
-    fetch(`http://localhost:3000/protected`,{
+    fetch(`https://api.mypolymerblog.com/protected`,{
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("cool-jwt"),
       }
@@ -56,7 +56,7 @@ class MyAdmin extends PolymerElement {
         margin-top: 30px;
         font-family: 'Nunito Sans', sans-serif;
       }
-      #post_title{
+      #permalinks{
         margin-bottom: 30px;
       }
       #post_content{
@@ -96,13 +96,13 @@ class MyAdmin extends PolymerElement {
       <paper-button raised on-click="logOut">Log Out</paper-button>
       <div class="card">
         <iron-form id="postForm" >
-          <form method="post" action="http://localhost:3000/posts" is="iron-form">
+          <form method="post" action="https://api.mypolymerblog.com/posts" is="iron-form">
             <paper-input decorator type="text" label="Post Author" id="post_author" name="post_author" value="admin">
             </paper-input>
 
             <paper-input decorator type="text" label="Post Categories" id="post_categories" name="post_categories">
             </paper-input>
-            <vaadin-upload target="http://localhost:3000/upload" max-files="20" accept="application/json, jpg, image/*" 
+            <vaadin-upload target="https://api.mypolymerblog.com/upload" max-files="20" accept="application/json, jpg, image/*" 
             method="POST" files="{{files}}">
               <div slot="file-list">
                 <h4>Files</h4>
@@ -120,6 +120,9 @@ class MyAdmin extends PolymerElement {
 
             <paper-input decorator type="text" label="Post Title" id="post_title" name="post_title">
             </paper-input>
+            
+            <paper-input decorator type="text" label="Permalinks" id="permalinks" name="permalinks">
+            </paper-input>
           
             <div class="rich-text-container">
               <h1>Post Content</h1>
@@ -134,16 +137,16 @@ class MyAdmin extends PolymerElement {
                       <fontawesome-icon prefix="fas" name="italic" fixed-width></fontawesome-icon>
                   </paper-button>
                   <paper-button raised class="richtext-button" on-click="alignLeft">
-                    <fa-icon class="fas fa-align-left" color="#757575" size="1em"></fa-icon>
+                    <fontawesome-icon prefix="fas" name="align-left" fixed-width></fontawesome-icon>
                   </paper-button>
                   <paper-button raised class="richtext-button" on-click="alignCenter">
-                    <fa-icon class="fas fa-align-center" color="#757575" size="1em"></fa-icon>
+                    <fontawesome-icon prefix="fas" name="align-center" fixed-width></fontawesome-icon>
                   </paper-button>
                   <paper-button raised class="richtext-button" on-click="alignRight">
-                    <fa-icon class="fas fa-align-right" color="#757575" size="1em"></fa-icon>
+                    <fontawesome-icon prefix="fas" name="align-right" fixed-width></fontawesome-icon>
                   </paper-button>
                   <paper-button raised class="richtext-button" on-click="addLink">
-                    <fa-icon class="fas fa-link" color="#757575" size="1em"></fa-icon>
+                    <fontawesome-icon prefix="fas" name="link" fixed-width></fontawesome-icon>
                   </paper-button>
                   <select class="richtext-selector" on-change="headingCommand" id="selectHeading">
                       <option> Choose Your Heading </option>
@@ -166,7 +169,7 @@ class MyAdmin extends PolymerElement {
                       <option value="Nunito Sans">Nunito Sans</option>
                       <option value="Fira Sans">Fira Sans</option>
                   </select>
-                  <vaadin-upload target="http://localhost:3000/upload" max-files="20" accept="application/json, jpg, image/*" 
+                  <vaadin-upload target="https://api.mypolymerblog.com/upload" max-files="20" accept="application/json, jpg, image/*" 
                   method="POST" on-upload-success="uploadSuccess">
                   </vaadin-upload>
               </div>
@@ -203,7 +206,7 @@ class MyAdmin extends PolymerElement {
     location.href = `/adminposts`;
   }
   logOut(){
-    fetch("http://localhost:3000/logout")
+    fetch("https://api.mypolymerblog.com/logout")
     .then(res => console.log(res.status));
     localStorage.removeItem("cool-jwt");
     location.href = `/view3`;
@@ -274,7 +277,7 @@ class MyAdmin extends PolymerElement {
     var id = "test";
     console.log(imgname);
     const addimage = this.$.richtext.contentDocument;
-    var img = "<div style='max-width: 800px; max-height: 600px; display: block;'><img style='width: 100%; text-align: center;' src='http://localhost:3000/images/" + imgname + "'</div>";
+    var img = "<div style='max-width: 800px; max-height: 600px; display: block;'><img alt='polymer-3.0' style='width: 100%; text-align: center;' src='https://api.mypolymerblog.com/images/" + imgname + "'</div>";
     addimage.execCommand('insertHTML', true, img);
   }
 

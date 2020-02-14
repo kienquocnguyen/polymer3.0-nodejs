@@ -32,7 +32,7 @@ class AdminPost extends PolymerElement {
     super.ready();
     console.log(localStorage.getItem("cool-jwt"));
  
-    fetch(`http://localhost:3000/protected`,{
+    fetch(`https://api.mypolymerblog.com/protected`,{
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("cool-jwt"),
       }
@@ -148,7 +148,7 @@ class AdminPost extends PolymerElement {
     location.href = `/admin`;
   }
   logOut(){
-    fetch("http://localhost:3000/logout")
+    fetch("https://api.mypolymerblog.com/logout")
     .then(res => console.log(res.status));
     localStorage.removeItem("cool-jwt");
     location.href = `/view3`;
@@ -163,7 +163,7 @@ class AdminPost extends PolymerElement {
   deletePost(){
     const postid = this.$.postId;
     console.log(postid.value);
-    fetch(`http://localhost:3000/delete/post/${postid.value}`)
+    fetch(`https://api.mypolymerblog.com/delete/post/${postid.value}`)
     .then(res => res.status);
     alert("Post Deleted");
     location.href = `/adminposts`;
@@ -180,13 +180,13 @@ class AdminPost extends PolymerElement {
     if(this.page != 1){
       params = Math.pow(2, this.page);
       location.path = `/adminposts/${this.page}`;
-      fetch(`http://localhost:3000/posts/${params}`)
+      fetch(`https://api.mypolymerblog.com/posts/${params}`)
       .then(res => res.json())
       .then(myposts => this.myposts = myposts)
     }else{
       params = 0;
       location.path = `/adminposts/${this.page}`;
-      fetch(`http://localhost:3000/posts/${params}`)
+      fetch(`https://api.mypolymerblog.com/posts/${params}`)
       .then(res => res.json())
       .then(myposts => this.myposts = myposts)
       console.log(this.page);
@@ -194,18 +194,18 @@ class AdminPost extends PolymerElement {
   }
 
   editPost(e){
-    const id = e.model.item.id;
-    location.href = `/editpost/?post=${id}`
+    const permalinks = e.model.item.permalinks;
+    location.href = `/editpost/?post=${permalinks}`;
   }
 
   connectedCallback(e){
     var params = this.queryParams;
     super.connectedCallback();
-    fetch(`http://localhost:3000/posts/${params}`)
+    fetch(`https://api.mypolymerblog.com/posts/${params}`)
     .then(res => res.json())
     .then(myposts => this.myposts = myposts)
     console.log(params);
-    fetch(`http://localhost:3000/postscount`)
+    fetch(`https://api.mypolymerblog.com/postscount`)
     .then(res => res.json())
     .then(postcount => this.postcount = postcount)
   }

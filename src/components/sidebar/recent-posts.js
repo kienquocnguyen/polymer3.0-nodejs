@@ -111,7 +111,7 @@ class RecentPosts extends PolymerElement {
                 <a>
                     <div class="ratio">
                         <div class="ratio-container">
-                            <iron-image class="ratio-content" src="[[recentImages]]"></iron-image>
+                            <iron-image alt="polymer-3.0" class="ratio-content" src="[[recentImages]]"></iron-image>
                         </div>
                     </div>
                     <div class="recent-posts-count">

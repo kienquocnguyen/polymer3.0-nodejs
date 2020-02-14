@@ -48,9 +48,12 @@ class MyAbout extends PolymerElement {
             float: right;
             height: 300px;
         }
+        .social-contact{
+            display: inline-flex;
+        }
         .social-link{
             text-decoration: none;
-            padding-right: 5px;
+            padding-right: 15px;
         }
         .my-avatar{
             --iron-image-height: 200px;
@@ -95,6 +98,7 @@ class MyAbout extends PolymerElement {
             }
             .about-avatar{
                 width: 100%;
+                height: 150px;
             }
             .about-content{
                 width: 100%;
@@ -114,7 +118,7 @@ class MyAbout extends PolymerElement {
         <div class="about-avatar">
             <div class="ratio">
                 <div class="ratio-container">
-                    <iron-image class="my-avatar" src="images/avatar.jpg"></iron-image>
+                    <iron-image alt="polymer-3.0" class="my-avatar" src="images/avatar.jpg"></iron-image>
                 </div>
             </div>
         </div>
@@ -124,15 +128,17 @@ class MyAbout extends PolymerElement {
             <p>
                 *** <i>For more detail here is my contact. Feel free to contact me whenever you need.</i>
             </p>
-            <a class="social-link" href="https://www.facebook.com/CWF98">
-                <fa-icon class="fab fa-facebook" color="black" size="3em"></fa-icon>
-            </a>
-            <a class="social-link" href="https://www.instagram.com/kienquocnguyen1998">
-                <fa-icon class="fab fa-instagram" color="black" size="3em"></fa-icon>
-            </a>
-            <a class="social-link" href="https://www.linkedin.com/in/nguyen-quoc-80a9b214b">
-                <fa-icon class="fab fa-linkedin" color="black" size="3em"></fa-icon>
-            </a>
+            <div class="social-contact">
+                <a class="social-link" href="https://www.facebook.com/CWF98">
+                    <fontawesome-icon prefix="fab" name="facebook" size="3em" style="color: black; font-size: 45px;"></fontawesome-icon>
+                </a>
+                <a class="social-link" href="https://www.instagram.com/kienquocnguyen1998">
+                    <fontawesome-icon prefix="fab" name="instagram" size="3em" style="color: black; font-size: 45px;"></fontawesome-icon>
+                </a>
+                <a class="social-link" href="https://www.linkedin.com/in/nguyen-quoc-80a9b214b">
+                    <fontawesome-icon prefix="fab" name="linkedin" size="3em" style="color: black; font-size: 45px;"></fontawesome-icon>
+                </a>
+            </div>
         </div>
       </div>
     `;

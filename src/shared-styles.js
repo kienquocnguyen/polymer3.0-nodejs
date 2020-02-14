@@ -157,6 +157,11 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         .container {
             width: 750px;
         }
+        @media screen and (max-width: 380px) {
+          .intro .intro-title{
+            font-size: 40px;
+          }
+        }
 /*Intro*/
       .post-meta-categories{
         padding-left: 0;
@@ -177,6 +182,12 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         padding-left: 50px;
         padding-right: 50px;
         margin-top: 50px;
+      }
+      @media screen and (max-width: 425px){
+        .entry-content{
+          padding-left: 0px;
+          padding-right: 0px;
+        }
       }
     </style>
   </template>

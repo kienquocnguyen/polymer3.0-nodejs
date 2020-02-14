@@ -41,7 +41,7 @@ class MyView3 extends PolymerElement {
       </feature-image>
       <div class="card">
         <iron-form id="signupForm" on-iron-form-response="catchResponse" on-iron-form-error="errorReponse">
-          <form method="post" action="http://localhost:3000/users" is="iron-form">
+          <form method="post" action="https://api.mypolymerblog.com/users" is="iron-form">
               <paper-input decorator type="text" label="First Name" id="first_name" name="first_name">
               </paper-input>
               <paper-input decorator type="text" label="Last Name" id="last_name" name="last_name">

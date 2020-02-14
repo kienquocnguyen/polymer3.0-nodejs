@@ -154,6 +154,11 @@ class MyApp extends PolymerElement {
           margin-top: 10px;
         }
       }
+      @media screen and (max-width: 380px) {
+        .main-title{
+          font-size: 25px;
+        }
+      }
       </style>
 
       <app-location route="{{route}}" url-space-regex="^[[rootPath]]">
