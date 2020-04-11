@@ -22,7 +22,8 @@ import 'fontawesome-icon';
 import 'fa-icons';
 class MyAdmin extends PolymerElement {
   constructor(){
-    super();   
+    super();
+       
   }
   ready(){
     super.ready();
@@ -35,7 +36,7 @@ class MyAdmin extends PolymerElement {
     })
     .then(res => {
       if(res.status != 200){
-        this.set('route.path', '/view3');
+        this.set('route.path', '/view3')
         alert("Please login first");
       }
       else{
@@ -55,6 +56,34 @@ class MyAdmin extends PolymerElement {
         --app-grid-item-height: 650px;
         margin-top: 30px;
         font-family: 'Nunito Sans', sans-serif;
+        animation: fadein 1.5s;
+        -moz-animation: fadein 1.5s; /* Firefox */
+        -webkit-animation: fadein 2s; /* Safari and Chrome */
+        -o-animation: fadein 1.5s;
+      }
+      @-moz-keyframes fadein { /* Firefox */
+        from {
+            opacity:0;
+        }
+        to {
+            opacity:1;
+        }
+      }
+      @-webkit-keyframes fadein { /* Safari and Chrome */
+          from {
+              opacity:0;
+          }
+          to {
+              opacity:1;
+          }
+      }
+      @-o-keyframes fadein { /* Opera */
+          from {
+              opacity:0;
+          }
+          to {
+              opacity: 1;
+          }
       }
       #permalinks{
         margin-bottom: 30px;
@@ -95,7 +124,7 @@ class MyAdmin extends PolymerElement {
       <paper-button raised on-click="postsList">Posts List</paper-button>
       <paper-button raised on-click="logOut">Log Out</paper-button>
       <div class="card">
-        <iron-form id="postForm" >
+        <iron-form id="postForm">
           <form method="post" action="https://api.mypolymerblog.com/posts" is="iron-form">
             <paper-input decorator type="text" label="Post Author" id="post_author" name="post_author" value="admin">
             </paper-input>
@@ -194,13 +223,21 @@ class MyAdmin extends PolymerElement {
     const richtextvalue = this.$.richtext.contentWindow.document.body;
     const richtextcontent = this.$.post_content;
     richtextcontent.value = richtextvalue.innerHTML;
-    var submitted = this.$.postForm.submit();
-    submitted;
+    var submitted = this.$.postForm;
+    submitted.addEventListener('iron-form-presubmit', function(event) {
+      event.target.request.headers = {'Authorization':'Bearer ' + localStorage.getItem("cool-jwt")}
+    });
+
+    submitted.submit();
     if(err){
       console.log(err);
     }
     alert("success");
     console.log("success");
+  }
+  preSubmit(e){
+    console.log(e)
+    console.log("testestyestesyest")
   }
   postsList(){
     location.href = `/adminposts`;

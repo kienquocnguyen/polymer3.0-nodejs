@@ -49,8 +49,35 @@ class SinglePost extends PolymerElement {
         --app-grid-item-height: 650px;
         margin-top: 30px;
         font-family: 'Nunito Sans', sans-serif;
+        animation: fadein 1s;
+        -moz-animation: fadein 1s; /* Firefox */
+        -webkit-animation: fadein 1s; /* Safari and Chrome */
+        -o-animation: fadein 1s;
       }
-
+      @-moz-keyframes fadein { /* Firefox */
+        from {
+            opacity:0;
+        }
+        to {
+            opacity:1;
+        }
+      }
+      @-webkit-keyframes fadein { /* Safari and Chrome */
+          from {
+              opacity:0;
+          }
+          to {
+              opacity:1;
+          }
+      }
+      @-o-keyframes fadein { /* Opera */
+          from {
+              opacity:0;
+          }
+          to {
+              opacity: 1;
+          }
+      }
 /*MENU*/
       .single-title{
         position: relative;

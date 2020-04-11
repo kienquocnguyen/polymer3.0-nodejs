@@ -19,10 +19,11 @@ import '@polymer/app-layout/app-toolbar/app-toolbar.js';
 import '@polymer/app-layout/app-grid/app-grid-style';
 import '@polymer/app-route/app-location.js';
 import '@polymer/app-route/app-route.js';
-import '@polymer/iron-pages/iron-pages.js';
+import 'iron-lazy-pages/iron-lazy-pages.js';
 import '@polymer/iron-selector/iron-selector.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@polymer/paper-button/paper-button';
+import '@polymer/paper-spinner/paper-spinner.js';
 import './my-icons.js';
 
 // Gesture events like tap and track generated from touch will not be
@@ -40,11 +41,20 @@ class MyApp extends PolymerElement {
       :host {
         --app-primary-color: #4285f4;
         --app-secondary-color: black;
-        
         display: block;
       }
-      @import url(https://fonts.googleapis.com/css?family=Fira+Sans);
-      @import url(https://fonts.googleapis.com/css?family=Nunito+Sans);
+      @font-face { 
+        font-family: Nunito Sans; 
+        src: url(../fonts/Nunito_Sans/NunitoSans-Regular.ttf); 
+        font-weight: normal;
+        font-display: swap
+      }
+      @font-face { 
+        font-family: Fira Sans; 
+        src: url(../fonts/Fira_Sans/FiraSans-Regular.ttf); 
+        font-weight: normal;
+        font-display: swap
+      }
       app-drawer-layout:not([narrow]) [drawer-toggle] {
         display: none;
       }
@@ -58,7 +68,20 @@ class MyApp extends PolymerElement {
         border-bottom: var(--menu-bottom, 0px);
         display: var(--menu-display, block);
       }
-
+      paper-spinner.multi {
+        --paper-spinner-layer-1-color: var(--paper-blue-600);
+        --paper-spinner-layer-2-color: var(--paper-cyan-600);
+        --paper-spinner-layer-3-color: var(--paper-blue-600);
+        --paper-spinner-layer-4-color: var(--paper-amber-600);
+        position: absolute;
+        margin: auto;
+        width: 100px;
+        height: 100px;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
       app-header paper-icon-button {
         --paper-icon-button-ink-color: white;
       }
@@ -102,12 +125,12 @@ class MyApp extends PolymerElement {
       .layout .logo{
         padding-left: 30px;
       }
-      iron-pages{
+      iron-lazy-pages{
         background-color: white;
         margin-top: -100px;
       }
       @media screen and (max-width: 1057px){
-        iron-pages{
+        iron-lazy-pages{
           margin-top: -140px;
         }
       }
@@ -171,7 +194,7 @@ class MyApp extends PolymerElement {
         <div class="mobile-menu">
           <a name="homepage" href="[[rootPath]]home">Home</a>
           <a name="polymer-element" href="[[rootPath]]polymer-element">Polymer Element</a>
-          <a name="view3" href="[[rootPath]]about">About Me</a>
+          <a name="about" href="[[rootPath]]about">About Me</a>
         </div>
       </app-drawer>
       <!-- Main content -->
@@ -182,16 +205,16 @@ class MyApp extends PolymerElement {
               <div main-title="" class="main-title">Polymer Blog</div>
             </app-toolbar>
           </div>
-          <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list menu" role="navigation">
+          <iron-selector selected="{{page}}" attr-for-selected="name" class="drawer-list menu" role="navigation">
             <a name="homepage" href="[[rootPath]]home">Home</a>
             <a name="polymer-element" href="[[rootPath]]polymer-element">Polymer Element</a>
-            <a name="view3" href="[[rootPath]]about">About Me</a>
+            <a name="about" href="[[rootPath]]about">About Me</a>
             
           </iron-selector>
           <paper-icon-button class="drawer-list mobile-menu-button" icon="my-icons:menu" on-tap="toggleDrawer"></paper-icon-button>
         </app-header>
 
-          <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
+          <iron-lazy-pages selected="{{page}}" attr-for-selected="name" loading="{{loading}}" role="main">
             <my-home name="home"></my-home>
             <my-polymerelement name="polymer-element"></my-polymerelement>
             <my-view3 name="view3"></my-view3>
@@ -201,7 +224,8 @@ class MyApp extends PolymerElement {
             <my-view404 name="view404"></my-view404>
             <admin-post name="adminposts"></admin-post>
             <edit-post name="editpost"></edit-post>
-          </iron-pages>
+          </iron-lazy-pages>
+          <paper-spinner id="webloading" class="multi" active="[[loading]]"></paper-spinner>
         </app-header-layout>
       </app-drawer-layout>
     `;
@@ -224,6 +248,7 @@ class MyApp extends PolymerElement {
       '_routePageChanged(routeData.page)'
     ];
   }
+
   toggleDrawer(){
     this.$.drawer.toggle();
     this.$.drawer.slot="drawer";

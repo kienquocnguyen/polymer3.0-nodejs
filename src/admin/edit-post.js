@@ -14,7 +14,6 @@ import '../components/intro/feature-image';
 import '@polymer/paper-input/paper-input';
 import '@polymer/paper-button/paper-button';
 import '@polymer/iron-form/iron-form';
-import '@polymer/iron-ajax/iron-ajax';
 import '@polymer/app-route/app-location.js';
 import '@polymer/app-route/app-route.js';
 import '@vaadin/vaadin-upload/vaadin-upload.js';
@@ -51,6 +50,34 @@ class EditPost extends PolymerElement {
         --app-grid-item-height: 650px;
         margin-top: 30px;
         font-family: 'Nunito Sans', sans-serif;
+        animation: fadein 1.5s;
+        -moz-animation: fadein 1.5s; /* Firefox */
+        -webkit-animation: fadein 1.5s; /* Safari and Chrome */
+        -o-animation: fadein 1.5s;
+      }
+      @-moz-keyframes fadein { /* Firefox */
+        from {
+            opacity:0;
+        }
+        to {
+            opacity:1;
+        }
+      }
+      @-webkit-keyframes fadein { /* Safari and Chrome */
+          from {
+              opacity:0;
+          }
+          to {
+              opacity:1;
+          }
+      }
+      @-o-keyframes fadein { /* Opera */
+          from {
+              opacity:0;
+          }
+          to {
+              opacity: 1;
+          }
       }
       #post_title{
         margin-bottom: 30px;
@@ -221,6 +248,11 @@ class EditPost extends PolymerElement {
     const richtextcontent = this.shadowRoot.getElementById("post_content");
     richtextcontent.value = richtextvalue.innerHTML;
     var postform = this.shadowRoot.getElementById("postForm");
+
+    postform.addEventListener('iron-form-presubmit', function(event) {
+      event.target.request.headers = {'Authorization':'Bearer ' + localStorage.getItem("cool-jwt")}
+    });
+    
     var submitted = postform.submit();
     submitted;
     if(err){

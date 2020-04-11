@@ -31,7 +31,35 @@ class MyAbout extends PolymerElement {
             --app-grid-item-height: 650px;
             margin-top: 30px;
             font-family: 'Nunito Sans', sans-serif;
+            animation: fadein 1.5s;
+            -moz-animation: fadein 1.5s; /* Firefox */
+            -webkit-animation: fadein 2s; /* Safari and Chrome */
+            -o-animation: fadein 1.5s;
         }
+        @-moz-keyframes fadein { /* Firefox */
+            from {
+                opacity:0;
+            }
+            to {
+                opacity:1;
+            }
+          }
+          @-webkit-keyframes fadein { /* Safari and Chrome */
+              from {
+                  opacity:0;
+              }
+              to {
+                  opacity:1;
+              }
+          }
+          @-o-keyframes fadein { /* Opera */
+              from {
+                  opacity:0;
+              }
+              to {
+                  opacity: 1;
+              }
+          }
         .about-page{
             padding-left: 100px;
             padding-right: 100px;

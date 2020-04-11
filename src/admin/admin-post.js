@@ -71,12 +71,43 @@ class AdminPost extends PolymerElement {
         --app-grid-item-height: 650px;
         margin-top: 30px;
         font-family: 'Nunito Sans', sans-serif;
+        animation: fadein 3s;
+        -moz-animation: fadein 3s; /* Firefox */
+        -webkit-animation: fadein 1.5s; /* Safari and Chrome */
+        -o-animation: fadein 3s;
+      }
+      @-moz-keyframes fadein { /* Firefox */
+        from {
+            opacity:0;
+        }
+        to {
+            opacity:1;
+        }
+      }
+      @-webkit-keyframes fadein { /* Safari and Chrome */
+          from {
+              opacity:0;
+          }
+          to {
+              opacity:1;
+          }
+      }
+      @-o-keyframes fadein { /* Opera */
+          from {
+              opacity:0;
+          }
+          to {
+              opacity: 1;
+          }
       }
       .admin-posts{
         margin-top: 150px;
       }
       datetime-input{
         display: none;
+      }
+      vaadin-grid-cell-content:hover{
+        overflow: visible;
       }
     </style>
     
@@ -163,7 +194,11 @@ class AdminPost extends PolymerElement {
   deletePost(){
     const postid = this.$.postId;
     console.log(postid.value);
-    fetch(`https://api.mypolymerblog.com/delete/post/${postid.value}`)
+    fetch(`https://api.mypolymerblog.com/delete/post/${postid.value}`,{
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("cool-jwt"),
+      }
+    })
     .then(res => res.status);
     alert("Post Deleted");
     location.href = `/adminposts`;

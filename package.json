@@ -39,6 +39,7 @@
     "@polymer/paper-listbox": "^3.0.1",
     "@polymer/paper-menu": "0.0.3",
     "@polymer/paper-menu-button": "^3.0.1",
+    "@polymer/paper-spinner": "^3.0.2",
     "@polymer/paper-tabs": "^3.1.0",
     "@polymer/polymer": "^3.0.0",
     "@vaadin/vaadin-date-picker": "^4.0.5",
@@ -48,6 +49,7 @@
     "fa-icons": "^0.1.9",
     "fontawesome-icon": "^1.0.4",
     "graphql": "^14.5.8",
+    "iron-lazy-pages": "^3.0.2",
     "lit-element": "^2.2.0",
     "polymer-apollo": "^2.0.0-rc.6",
     "s-grid": "^1.2.1"

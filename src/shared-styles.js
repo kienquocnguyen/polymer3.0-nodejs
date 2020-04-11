@@ -70,6 +70,9 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         white-space: nowrap;
         text-overflow: ellipsis;
       }
+      .posts-list .post-title h2:hover{
+        overflow: visible;
+      }
       .bypostauthor{
         font-weight: 400;
         color: #8d8d8d;

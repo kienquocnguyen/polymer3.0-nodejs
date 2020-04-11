@@ -131,21 +131,21 @@ class SingleContent extends PolymerElement {
             <div class="post-container">
                 <div class="single-meta">
                     <iron-image alt="polymer-3.0" class="post-images" src="[[singleImages]]"></iron-image>
-                    <a href="http://google.com/" class="post-title">
+                    <a class="post-title">
                         <h2>[[singleTitle]]</h2>
                     </a>
                     <div class="post-meta-data">
                         <div class="single-post-meta">
                             <span class="post-meta-author">
                                 by
-                                <a href="http://google.com/" class="bypostauthor">[[singleAuthor]]</a>
-                                <a href="http://google.com/" class="post-meta-date">[[singleDate]]</a>
+                                <a class="bypostauthor">[[singleAuthor]]</a>
+                                <a class="post-meta-date">[[singleDate]]</a>
                             </span>
                         </div>
                         <div class="single-post-meta-two">
                             <div class="post-meta-comments">
                                 <span class="post-meta-categories">
-                                    <a href="https://www.google.com/">[[singleCategories]]</a>
+                                    <a>[[singleCategories]]</a>
                                 </span>
                             </div>
                         </div>

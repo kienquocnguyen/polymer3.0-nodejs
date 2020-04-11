@@ -48,6 +48,37 @@ class MyHome extends PolymerElement {
         --app-grid-item-height: 650px;
         margin-top: 30px;
         font-family: 'Nunito Sans', sans-serif;
+        animation: fadein 1.5s;
+        -moz-animation: fadein 1.5s; /* Firefox */
+        -webkit-animation: fadein 2s; /* Safari and Chrome */
+        -o-animation: fadein 1.5s;
+      }
+      @-moz-keyframes fadein { /* Firefox */
+        from {
+            opacity:0;
+        }
+        to {
+            opacity:1;
+        }
+      }
+      @-webkit-keyframes fadein { /* Safari and Chrome */
+          from {
+              opacity:0;
+          }
+          to {
+              opacity:1;
+          }
+      }
+      @-o-keyframes fadein { /* Opera */
+          from {
+              opacity:0;
+          }
+          to {
+              opacity: 1;
+          }
+      }
+      a{
+        text-decoration: none;
       }
       #content.content-with-sidebar-right{
           width: 73%;
@@ -121,7 +152,7 @@ class MyHome extends PolymerElement {
           <div class="app-grid">
             <template is="dom-repeat" items="{{myposts}}">
               <div class="item">  
-                <button class="posts-click" on-click="gotoSingle">
+                <a href="[[rootPath]]single-post?post={{item.permalinks}}">
                   <grid-articles
                     post-images="https://api.mypolymerblog.com/images/{{item.post_images}}"
                     post-author="{{item.post_author}}"
@@ -131,7 +162,7 @@ class MyHome extends PolymerElement {
                     post-categories="{{item.post_categories}}"
                     >
                   </grid-articles>
-                </button>
+                </a>
               </div>
             </template>
           </div>
