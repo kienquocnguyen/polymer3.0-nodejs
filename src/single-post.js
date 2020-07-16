@@ -242,7 +242,6 @@ class SinglePost extends PolymerElement {
   connectedCallback(){
     super.connectedCallback();
     var queryParams = this.getQueryParameters();
-    console.log("HIHI", queryParams.post);
     var params;
     params = queryParams.post;
     fetch(`https://api.mypolymerblog.com/post/${params}`)

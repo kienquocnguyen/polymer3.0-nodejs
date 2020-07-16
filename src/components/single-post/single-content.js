@@ -122,7 +122,7 @@ class SingleContent extends PolymerElement {
                 --iron-image-height: 350px;
                 --iron-image-width: 100%;
                 padding-left: 20px;
-                padding-rgiht: 20px;
+                padding-right: 20px;
             }
         }
       </style>
